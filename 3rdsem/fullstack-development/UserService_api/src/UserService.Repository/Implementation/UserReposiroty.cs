@@ -7,6 +7,7 @@ using Dapper;
 using UserService.Model;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Transactions;
 
 
 namespace UserService.Repository.Implementation
@@ -19,7 +20,26 @@ namespace UserService.Repository.Implementation
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-       
+        public User GetAllUser(string email, string pwd)
+        {
+            using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
+            {
+                string selectuser = @"SELECT * FROM Users WHERE email = @email and pwd = @pwd ";
+                _sqlConnectionFactory.OpenConnection(connection);
+                using (var transaction = _sqlConnectionFactory.BeginTransaction(connection))
+                {
+                    try
+                    {
+                        return connection.QueryAsync<User>(selectuser, new { email = email, pwd = pwd }, transaction: transaction).Result.FirstOrDefault();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw new InvalidOperationException(ex.Message);
+                    }
+                }
+            }
+        }
 
         public async Task<List<User>> GetAllUsers()
         {
@@ -63,33 +83,31 @@ namespace UserService.Repository.Implementation
         //    }
         //}
 
-        //public async void AddUserdetails(User usersdetails)
-        //{
-        //    using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
-        //    {
-        //        string insertQuery = @"INSERT INTO tbluser ([Email], [Name], [Mobile], [password], [IsActive], [CreatedDate], [IsMailDelivered], [UserKey]) VALUES (@Email, @Name, @Mobile, @password, @IsActive, @CreatedDate, @IsMailDelivered, @UserKey)";
-        //        _sqlConnectionFactory.OpenConnection(connection);
-        //        try
-        //        {
-        //            var results = await connection.ExecuteAsync(insertQuery, new
-        //            {
-        //                Email = usersdetails.Email,
-        //                Name = usersdetails.Name,
-        //                Mobile = usersdetails.Mobile,
-        //                password = usersdetails.Password,
-        //                IsActive = usersdetails.IsActive,
-        //                CreatedDate = DateTime.Now,
-        //                IsMailDelivered = usersdetails.IsMailDelivered,
-        //                UserKey = usersdetails.UserKey
-        //            });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine(ex.Message.ToString() + "\n" + ex.InnerException.ToString());
-        //            throw new InvalidOperationException(ex.Message);
-        //        }
-        //    }
-        //}
+        public async void AddUserdetails(User usersdetails)
+        {
+            using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
+            {
+                string insertQuery = @"INSERT INTO users ([email],[pwd],[username],[user_address],[favorite_genres],[reading_preferences]) VALUES (@email, @pwd, @username, @user_address, @favorite_genres, @reading_preferences)";
+                _sqlConnectionFactory.OpenConnection(connection);
+                try
+                {
+                    var results = await connection.ExecuteAsync(insertQuery, new
+                    {
+                        email = usersdetails.email,
+                        pwd = usersdetails.pwd,
+                        username = usersdetails.username,
+                        user_address = usersdetails.user_address,
+                        favorite_genres = usersdetails.favorite_genres,
+                        reading_preferences = usersdetails.reading_preferences
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message.ToString() + "\n" + ex.InnerException.ToString());
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+        }
 
         //public int ActivateUser(User users)
         //{

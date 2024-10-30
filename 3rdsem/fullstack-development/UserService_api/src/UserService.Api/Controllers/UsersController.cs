@@ -6,7 +6,7 @@ using Service.Interface;
 
 namespace UserService.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -24,28 +24,19 @@ namespace UserService.Api.Controllers
         }
 
         // GET api/<UsersController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost]
+        public DtoUserprofile Getuser(string emailid,string pwd)
         {
-            return "value";
+            return _userService.GetAllUser(emailid, pwd);
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Adduser([FromBody] DtoUserprofile userdetails)
         {
+            _userService.AddUserdetails(userdetails);
         }
 
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }

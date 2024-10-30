@@ -9,6 +9,9 @@ namespace Service.Interface
 {
     public interface IUserProfileService
     {
+        public DtoUserprofile GetAllUser(string emailid, string pwd);
         public List<DtoUserprofile> GetAllUsers();
+
+        void AddUserdetails(DtoUserprofile userdetails);
     }
 }

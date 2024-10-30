@@ -5,6 +5,7 @@ using UserService.Repository.Interface;
 using System;
 using AutoMapper;
 using Service.Mapper;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSingleton<SqlConnectionFactory>();
 builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var mapperconfig = new MapperConfiguration(mc =>
 {
@@ -26,15 +30,22 @@ builder.Services.AddScoped<IUserRepository, UserReposiroty>();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 
 
-
-
 var app = builder.Build();
+if(app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(s => {
+           s.SwaggerEndpoint("/swagger/v1/swagger.json", "UserService");
+            s.RoutePrefix = string.Empty;
+        });
+ }
 
-
-// Configure the HTTP request pipeline.
 
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

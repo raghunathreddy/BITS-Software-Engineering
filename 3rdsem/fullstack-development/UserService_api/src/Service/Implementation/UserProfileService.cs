@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserService.Model;
 using UserService.Repository.Implementation;
 using UserService.Repository.Interface;
 
@@ -21,6 +22,19 @@ namespace Service.Implementation
             _mapper = mapper;
             // _emailHelper = emailHelper;
         }
+
+        public void AddUserdetails(DtoUserprofile userdetails)
+        {
+            var users = _mapper.Map<User>(userdetails);
+            _userReposiroty.AddUserdetails(users);
+        }
+
+        public DtoUserprofile GetAllUser(string emailid, string pwd)
+        {
+            var result = _userReposiroty.GetAllUser(emailid, pwd);
+            return _mapper.Map<DtoUserprofile>(result);
+        }
+
         public List<DtoUserprofile> GetAllUsers()
         {
             var result = _userReposiroty.GetAllUsers().Result;
