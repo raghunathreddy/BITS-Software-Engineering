@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Service.DtoModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UserService.Model;
 
 namespace Service.Mapper
 {
@@ -9,7 +11,7 @@ namespace Service.Mapper
     {
         public MappingProfile()
         {
-            //CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<User, DtoUserprofile>().ReverseMap();
             //CreateMap<UserActivation, User>().ReverseMap();
             //CreateMap<UserMusicTrack, MusicTrack>().ReverseMap();
         }

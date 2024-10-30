@@ -18,7 +18,7 @@ namespace UserService.Repository.Implementation
         {
             _configuration = configuration;
         }
-        public virtual IDbConnection GetConnection => new SqlConnection(_configuration.GetConnectionString("PranayamaDB"));
+        public virtual IDbConnection GetConnection => new SqlConnection(_configuration.GetConnectionString("BookliberaryDB"));
         public IDbTransaction BeginTransaction(IDbConnection connection)
         {
             return connection.BeginTransaction();
