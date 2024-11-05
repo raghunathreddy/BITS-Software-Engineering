@@ -12,6 +12,7 @@ namespace BookManagement.Service.Mapper
         public MappingProfile()
         {
             CreateMap<Book, DtoBook>().ReverseMap();
+            CreateMap<BookExchange, DtoBookExchange>().ReverseMap();
             //CreateMap<UserActivation, User>().ReverseMap();
             //CreateMap<UserMusicTrack, MusicTrack>().ReverseMap();
         }
