@@ -12,9 +12,9 @@ namespace BookManagement.Api.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _booksService;
-        public BooksController(IBookService userService)
+        public BooksController(IBookService bookservice)
         {
-            _booksService = userService;
+            _booksService = bookservice;
         }
         // GET: api/<UsersController>
         [HttpGet]
