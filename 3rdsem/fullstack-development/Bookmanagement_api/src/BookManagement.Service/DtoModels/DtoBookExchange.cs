@@ -12,7 +12,7 @@ namespace BookManagement.Service.DtoModels
 
             public int? book_id { get; set; }
             public int? requester_id { get; set; }
-            public int? request_message { get; set; }
+            public string? request_message { get; set; }
             public int? owner_id { get; set; }
             public string? status { get; set; }
             public string? delivery_method { get; set; }

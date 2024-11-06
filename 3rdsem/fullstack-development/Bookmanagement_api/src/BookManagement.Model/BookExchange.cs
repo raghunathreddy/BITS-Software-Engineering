@@ -9,6 +9,7 @@ namespace BookManagement.Model
     public class BookExchange
     {
         public int? exchange_id { get; set; }
+
         public int? book_id { get; set; }
         public int? requester_id { get; set; }
         public string? request_message { get; set; }
