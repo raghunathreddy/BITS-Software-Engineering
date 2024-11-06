@@ -26,8 +26,11 @@ IMapper mapper = mapperconfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 //DIJ Repository
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookExchangeReposirory, BookExchangeReposirory>();
+
 //BookManagement.Services
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookExchangeService, BookExchangeService>();
 
 
 var app = builder.Build();
