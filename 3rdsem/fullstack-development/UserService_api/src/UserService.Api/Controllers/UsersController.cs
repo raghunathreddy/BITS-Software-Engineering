@@ -17,7 +17,13 @@ namespace UserService.Api.Controllers
         }
         // GET: api/<UsersController>
         [HttpGet]
-        public List<DtoUserprofile> Get()
+        public List<DtoUserprofile> GetAllusers()
+        {
+            return _userService.GetAllUsers();
+            //return new string[] { "value1", "value2" };
+        }
+        [HttpGet("{id}")]
+        public List<DtoUserprofile> GetUser(int id)
         {
             return _userService.GetAllUsers();
             //return new string[] { "value1", "value2" };
@@ -25,18 +31,24 @@ namespace UserService.Api.Controllers
 
         // GET api/<UsersController>/5
         [HttpPost]
-        public DtoUserprofile Getuser(string emailid,string pwd)
+        public DtoUserprofile ValidateUser(string emailid,string pwd)
         {
             return _userService.GetAllUser(emailid, pwd);
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Adduser([FromBody] DtoUserprofile userdetails)
+        public void RegisterUser([FromBody] DtoUserprofile userdetails)
         {
             _userService.AddUserdetails(userdetails);
         }
 
-       
+        [HttpPost]
+        public void ResetPassword([FromBody] DtoUserprofile userdetails)
+        {
+            _userService.AddUserdetails(userdetails);
+        }
+
+
     }
 }

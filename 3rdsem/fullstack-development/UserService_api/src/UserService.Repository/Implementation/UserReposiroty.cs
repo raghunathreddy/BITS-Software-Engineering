@@ -41,6 +41,27 @@ namespace UserService.Repository.Implementation
             }
         }
 
+        public User GetUser(int user_id)
+        {
+            using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
+            {
+                string selectuser = @"SELECT * FROM Users WHERE user_id = @user_id ";
+                _sqlConnectionFactory.OpenConnection(connection);
+                using (var transaction = _sqlConnectionFactory.BeginTransaction(connection))
+                {
+                    try
+                    {
+                        return connection.QueryAsync<User>(selectuser, new { user_id = user_id }, transaction: transaction).Result.FirstOrDefault();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw new InvalidOperationException(ex.Message);
+                    }
+                }
+            }
+        }
+
         public async Task<List<User>> GetAllUsers()
         {
             using (IDbConnection connection = _sqlConnectionFactory.GetConnection)

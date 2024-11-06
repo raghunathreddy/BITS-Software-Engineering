@@ -11,7 +11,7 @@ namespace Service.Interface
     {
         public DtoUserprofile GetAllUser(string emailid, string pwd);
         public List<DtoUserprofile> GetAllUsers();
-
+        public DtoUserprofile GetUsers(int userid);
         void AddUserdetails(DtoUserprofile userdetails);
     }
 }
