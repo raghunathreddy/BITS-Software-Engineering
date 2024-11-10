@@ -69,6 +69,19 @@ namespace Service.Implementation
             // Convert the byte array to the original string (using UTF8 encoding)
            return Encoding.UTF8.GetString(byteArray);
         }
-       
+
+        public void Updatepwd(DtoUserprofile userdetails)
+        {
+            var users = _mapper.Map<User>(userdetails);
+            var userdata = new User()
+            {
+                user_id=users.user_id,
+                email = users.email,
+                pwd = Encodepwd(users.pwd),
+               
+              
+            };
+            _userReposiroty.Updatepwd(userdata);
+        }
     }
 }

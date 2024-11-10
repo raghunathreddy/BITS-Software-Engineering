@@ -43,10 +43,11 @@ namespace UserService.Api.Controllers
             _userService.AddUserdetails(userdetails);
         }
 
-        [HttpPost]
-        public void ResetPassword([FromBody] DtoUserprofile userdetails)
+        [HttpPut("{id}")]
+        public void ResetPassword(int id,[FromBody] DtoUserprofile userdetails)
         {
-            _userService.AddUserdetails(userdetails);
+            var userdto = new DtoUserprofile() {user_id=id, pwd= userdetails.pwd };
+            _userService.Updatepwd(userdto);
         }
 
 

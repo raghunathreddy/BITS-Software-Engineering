@@ -13,5 +13,6 @@ namespace Service.Interface
         public List<DtoUserprofile> GetAllUsers();
         public DtoUserprofile GetUsers(int userid);
         void AddUserdetails(DtoUserprofile userdetails);
+        void Updatepwd(DtoUserprofile userdetails);
     }
 }

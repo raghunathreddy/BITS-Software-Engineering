@@ -130,6 +130,28 @@ namespace UserService.Repository.Implementation
             }
         }
 
+        public async void Updatepwd(User userdata)
+        {
+            using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
+            {
+                string insertQuery = @"UPDATE users SET [pwd] = @pwd where user_id=@userdata.user_id";
+                _sqlConnectionFactory.OpenConnection(connection);
+                try
+                {
+                    var results = await connection.ExecuteAsync(insertQuery, new
+                    {
+                        pwd = userdata.pwd,
+                       
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message.ToString() + "\n" + ex.InnerException.ToString());
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+        }
+
         //public int ActivateUser(User users)
         //{
         //    using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
