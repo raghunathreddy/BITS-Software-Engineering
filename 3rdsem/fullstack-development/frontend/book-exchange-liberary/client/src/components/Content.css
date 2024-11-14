@@ -1,0 +1,17 @@
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.content p {
+  font-size: 18px;
+  line-height: 1.5;
+}
