@@ -31,10 +31,18 @@ builder.Services.AddScoped<IBookExchangeReposirory, BookExchangeReposirory>();
 //BookManagement.Services
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookExchangeService, BookExchangeService>();
-
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()  // Allow requests from any origin
+               .AllowAnyMethod()  // Allow any HTTP method (GET, POST, etc.)
+               .AllowAnyHeader(); // Allow any HTTP headers
+    });
+});
 var app = builder.Build();
-if(app.Environment.IsDevelopment())
+app.UseCors();
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(s => {

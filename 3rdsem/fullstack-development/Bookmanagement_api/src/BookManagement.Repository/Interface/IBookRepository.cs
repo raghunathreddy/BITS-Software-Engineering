@@ -6,7 +6,7 @@ namespace BookManagement.Repository.Interface
 {
     public interface IBookRepository
     {
-        Book GetAllBooksUser(int? user_id);
+        Task<List<Book>> GetAllBooksUser(int? user_id);
         Task<List<Book>> GetAllBooks();
        
         void AddBooks(Book usersdetails);

@@ -20,7 +20,7 @@ namespace BookManagement.Repository.Implementation
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-        public Book GetAllBooksUser(int? user_id)
+        public async Task<List<Book>> GetAllBooksUser(int? user_id)
         {
             using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
             {
@@ -30,7 +30,8 @@ namespace BookManagement.Repository.Implementation
                 {
                     try
                     {
-                        return connection.QueryAsync<Book>(selectbooks, new { user_id = user_id }, transaction: transaction).Result.FirstOrDefault();
+                        var results = await connection.QueryAsync<Book>(selectbooks, new { user_id = user_id }, transaction: transaction);
+                        return results?.AsList();
                     }
                     catch (Exception ex)
                     {

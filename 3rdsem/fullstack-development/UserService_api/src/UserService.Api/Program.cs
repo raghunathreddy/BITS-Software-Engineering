@@ -28,9 +28,17 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddScoped<IUserRepository, UserReposiroty>();
 //Services
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
-
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()  // Allow requests from any origin
+               .AllowAnyMethod()  // Allow any HTTP method (GET, POST, etc.)
+               .AllowAnyHeader(); // Allow any HTTP headers
+    });
+});
 var app = builder.Build();
+app.UseCors(); ;
 if(app.Environment.IsDevelopment())
 {
     app.UseSwagger();

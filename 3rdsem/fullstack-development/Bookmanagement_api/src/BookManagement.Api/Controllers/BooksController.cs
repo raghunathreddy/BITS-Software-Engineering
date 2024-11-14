@@ -26,7 +26,7 @@ namespace BookManagement.Api.Controllers
 
         // GET api/<UsersController>/5
         [HttpPost]
-        public DtoBook Getuser(int? user_id)
+        public List<DtoBook> Getuser(int? user_id)
         {
             return _booksService.GetAllBooksUser(user_id);
         }

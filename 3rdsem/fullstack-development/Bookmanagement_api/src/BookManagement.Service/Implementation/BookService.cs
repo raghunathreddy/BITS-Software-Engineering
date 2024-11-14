@@ -37,10 +37,10 @@ namespace BookManagement.Service.Implementation
         }
 
 
-        public DtoBook GetAllBooksUser(int? user_id)
+        public List<DtoBook> GetAllBooksUser(int? user_id)
         {
-            var result = _booksReposiroty.GetAllBooksUser(user_id);
-            return _mapper.Map<DtoBook>(result);
+            var result = _booksReposiroty.GetAllBooksUser(user_id).Result;
+            return _mapper.Map<List<DtoBook>>(result);
         }
 
         public List<DtoBook> GetAllBooks()

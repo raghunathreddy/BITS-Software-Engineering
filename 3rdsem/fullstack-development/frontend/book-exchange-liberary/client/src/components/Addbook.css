@@ -1,0 +1,43 @@
+.new-book-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .new-book-container h2 {
+    text-align: center;
+  }
+  
+  .new-book-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .new-book-container label {
+    margin: 10px 0 5px;
+  }
+  
+  .new-book-container input {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .new-book-container button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .new-book-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

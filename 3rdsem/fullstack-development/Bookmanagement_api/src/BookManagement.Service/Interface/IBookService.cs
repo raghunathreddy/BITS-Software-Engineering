@@ -9,7 +9,7 @@ namespace BookManagement.Service.Interface
 {
     public interface IBookService
     {
-        public DtoBook GetAllBooksUser(int? user_id);
+        public List<DtoBook> GetAllBooksUser(int? user_id);
 
         public List<DtoBook> SearchBook(DtoBookSearch searchbook);
         public List<DtoBook> GetAllBooks();
