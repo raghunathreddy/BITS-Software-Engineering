@@ -6,7 +6,8 @@ function Addbook() {
   const [book, setBook] = useState({
     title: '',
     author: '',
-    isbn: '',
+    bookAvaliable: '',
+    condition: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

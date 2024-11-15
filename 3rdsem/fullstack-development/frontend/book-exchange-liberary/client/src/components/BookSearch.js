@@ -1,76 +1,64 @@
 // Example Book Search Component (BookSearch.js)
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Menu from './menu';
 
 function BookSearch() {
   //const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [query, setQuery] = useState('');
   const [books, setBooks] = useState([]);
-  // useEffect(() => {
-  //   const fetchBooks = async () => {
-  //     const response = await axios.get('/api/books', { params: { searchQuery } });
-  //     setBooks(response.data);
-  //   };
-  //   // fetchBooks();
-  // }, [searchQuery]);
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    console.log(query)
-    const response = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`);
+   useEffect(() => {
+  const fetchBooks = async () => {
+    const response = await fetch(`http://localhost:5203/api/BookExchange/GetExchangeBookdetails`);
     const data = await response.json();
     console.log(data);
-    setBooks(data.docs);
-  };
-  return (
-    <div>
-      <h2>book search</h2>
-      <form onSubmit={handleSearch}>
-        <div className="input-group mb-3">
-          <input className='form-control'
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for books"
-          />
-          <div className="input-group-append">
-            <button className="btn btn-primary" type="submit">Search</button>
-          </div>
-        </div>
-      </form>
-      <div className="container">
-        <div className="row">
-          {books.map(book => (<div key={book.key} className="col-md-4 mb-4">
-            <div className="card h-100">
-              <div className="card-body">
-                <h5 className="card-title">{book.title}</h5>
-                <p className="card-text">Author: {book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>                 <p className="card-text"><small className="text-muted">First Published: {book.first_publish_year || 'N/A'}</small></p>               </div>
-            </div>
-          </div>))}
-        </div>
-      </div>
+    setBooks(data);
+    };
+   fetchBooks();
+   }, [searchQuery]);
 
-      {/* <div className="row">
-          {books.map(book => (<div key={book.id} className="col-md-4 mb-4">
-            <div className="card h-100"> <div className="card-body">
-              <h5 className="card-title">{book.title}</h5>
-              <p className="card-text">Author: {book.author}</p>
-            </div>
-            </div>
-          </div>))}
-        </div> */}
-      {/* <div>
-          {books.map((book) => (
-            <div key={book._id}>
-              <h3>{book.title}</h3>
-              <p>{book.author}</p>
-              <p>{book.genre}</p>
-              <p>{book.condition}</p>
-            </div>
-          ))}
-        </div> */}
-    </div>
-  );
+  return (
+    
+    <div style={{ display: 'flex' }}>
+      {/* Sidebar (Menu) */}
+      <Menu />
+
+      <div style={{ marginLeft: '220px', padding: '20px', flex: 1 }}>
+        <h1>Books Avaliable for Exchange</h1>
+        <table className="user-table">
+          <thead>
+            <tr>
+              <th>Book_ID</th>
+              <th>Book_Owner</th>
+              <th>Title</th>
+              <th>Book_exchanged_To</th>
+              <th>Requested_status</th>
+              <th>Request_message</th>
+              <th>delivery_method</th>
+              <th>Exchange_date</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            {books.map(Book => (
+              <tr key={Book.exchange_id}>
+                <td>{Book.book_id}</td>
+                <td>{Book.book_Owner}</td>
+                <td>{Book.title}</td>
+                <td>{Book.book_exchanged_To}</td>
+                <td>{Book.requested_status}</td>
+                <td>{Book.request_message}</td>
+                <td>{Book.delivery_method}</td>
+                <td>{Book.exchange_date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      </div>
+      );
 }
 
-export default BookSearch;
+      export default BookSearch;
