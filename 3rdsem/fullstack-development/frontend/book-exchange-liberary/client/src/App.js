@@ -70,14 +70,14 @@ function App() {
     <Router>
       <div className="App">
         <header className="bg-primary text-white text-center py-3"><h1>Book Search Application</h1>
-          <nav>
+          {/* <nav>
              <ul className="nav justify-content-center">
               <li className="nav-item"><Link className="nav-link text-white" to="/">Login</Link></li>
               <li className="nav-item"><Link className="nav-link text-white" to="/search">Book Search</Link></li>
               <li className="nav-item"><Link className="nav-link text-white" to="/dashboard">Dashboard</Link></li>
               <li className="nav-item"><Link className="nav-link text-white" to="/addbook">Add New Book</Link></li>
             </ul>
-          </nav>
+          </nav> */}
         </header>
         <main className="container mt-5">
           <Routes>

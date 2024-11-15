@@ -2,24 +2,28 @@
 
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
+import Menu from './menu';
 
 function Dashboard() {
 
     const navigate = useNavigate();
+    const location = useLocation();
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const goToNewbook = () => {
         navigate('/addbook'); // Navigate to the new screen when button is clicked
       };
-    // Fetch data from an API
+    
     useEffect(() => {
+
+        const queryParams = new URLSearchParams(location.search);
+        const userid = queryParams.get('user_id');
         // Assuming the API returns a list of users
         const fetchbooks = async () => {
             try {
-                const response = await fetch('http://localhost:5203/api/Books/Getuser?user_id=1', {
+                const response = await fetch(`http://localhost:5203/api/Books/Getuser?user_id=${userid}`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json', // Accept JSON response
@@ -43,7 +47,7 @@ function Dashboard() {
         };
 
         fetchbooks();
-    }, []);  // Empty dependency array ensures this runs once on component mount
+    }, []);  
 
     if (loading) {
         return <div>Loading...</div>;
@@ -54,9 +58,13 @@ function Dashboard() {
     }
     return (
       
-        <><div className="table-container">
-            <h1>Your Books collection</h1>
-            <table className="user-table">
+        <div style={{ display: 'flex' }}>
+        {/* Sidebar (Menu) */}
+        <Menu />
+        
+        <div style={{ marginLeft: '220px', padding: '20px', flex: 1 }}>
+        <h1>Your Books collection</h1>
+        <table className="user-table">
                 <thead>
                     <tr>
                         <th>Book_ID</th>
@@ -78,10 +86,15 @@ function Dashboard() {
                     ))}
                 </tbody>
             </table>
-        </div><div className="input-group-append">
+        </div>
+        <div className="input-group-append">
         
                 <button className="btn btn-primary" type="submit" onClick={goToNewbook} >Add_NewBook</button>
-            </div></>
+            </div>
+        </div>
+
+
+        
 
     );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Addbook.css'
+import Menu from './menu';
 
 function Addbook() {
   const [book, setBook] = useState({
@@ -53,6 +54,9 @@ function Addbook() {
   };
 
   return (
+    <div style={{ display: 'flex' }}>
+    {/* Sidebar (Menu) */}
+    <Menu />
     <div className="new-book-container">
       <h2>Add New Book</h2>
       {success && <p style={{ color: 'green' }}>Book added successfully!</p>}
@@ -120,6 +124,7 @@ function Addbook() {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }
