@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Addbook.css'
 import Menu from './menu';
+import { useAuth } from './AuthContext';
 
 function Addbook() {
   const [book, setBook] = useState({
@@ -13,6 +14,7 @@ function Addbook() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
+  const { user, logout } = useAuth();
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;

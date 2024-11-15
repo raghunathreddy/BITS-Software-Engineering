@@ -4,20 +4,21 @@ import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Menu from './menu';
-
+import { useAuth } from './AuthContext';
 function Dashboard() {
     const navigate = useNavigate();
     const location = useLocation();
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { user, logout } = useAuth();
     const goToNewbook = () => {
         navigate('/addbook'); // Navigate to the new screen when button is clicked
     };
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
-        const userid = queryParams.get('user_id');
+        const userid = user.user_id; // queryParams.get('user_id');
         // Assuming the API returns a list of books
         const fetchbooks = async () => {
             try {
@@ -59,7 +60,7 @@ function Dashboard() {
             <Menu />
 
             <div style={{ marginLeft: '220px', padding: '20px', flex: 1 }}>
-                <h1>Your Books collection</h1>
+                <h1>My Books collection</h1>
                 <table className="user-table">
                     <thead>
                         <tr>

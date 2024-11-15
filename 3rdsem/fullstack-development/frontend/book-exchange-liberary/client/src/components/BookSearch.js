@@ -9,24 +9,47 @@ function BookSearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [query, setQuery] = useState('');
   const [books, setBooks] = useState([]);
-   useEffect(() => {
-  const fetchBooks = async () => {
-    const response = await fetch(`http://localhost:5203/api/BookExchange/GetExchangeBookdetails`);
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const response = await fetch(`http://localhost:5203/api/BookExchange/GetExchangeBookdetails`);
+      const data = await response.json();
+      console.log(data);
+      setBooks(data);
+    };
+    fetchBooks();
+  }, [searchQuery]);
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    console.log(query)
+    const response = await fetch(`http://localhost:5203/api/BookExchange/GetBookfilterTitle?title=${encodeURIComponent(query)}`);
     const data = await response.json();
     console.log(data);
     setBooks(data);
-    };
-   fetchBooks();
-   }, [searchQuery]);
+  };
 
   return (
-    
+
     <div style={{ display: 'flex' }}>
+
       {/* Sidebar (Menu) */}
       <Menu />
 
-      <div style={{ marginLeft: '220px', padding: '20px', flex: 1 }}>
+      <div style={{ marginLeft: '50px', padding: '20px', flex: 1 }}>
         <h1>Books Avaliable for Exchange</h1>
+        <div><form onSubmit={handleSearch}>
+          <div className="input-group mb-3">
+            <input className='form-control'
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for books"
+            />
+            <div className="input-group-append">
+              <button className="btn btn-primary" type="submit">Search</button>
+            </div>
+          </div>
+        </form></div>
         <table className="user-table">
           <thead>
             <tr>
@@ -38,7 +61,8 @@ function BookSearch() {
               <th>Request_message</th>
               <th>delivery_method</th>
               <th>Exchange_date</th>
-             
+              <th>Raise Request</th>
+
             </tr>
           </thead>
           <tbody>
@@ -52,13 +76,18 @@ function BookSearch() {
                 <td>{Book.request_message}</td>
                 <td>{Book.delivery_method}</td>
                 <td>{Book.exchange_date}</td>
+                <td>
+                  <div className="input-group-append">
+                    <button className="btn btn-primary" type="submit" >Request_Book</button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      </div>
-      );
+    </div>
+  );
 }
 
-      export default BookSearch;
+export default BookSearch;

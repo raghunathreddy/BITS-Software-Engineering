@@ -49,28 +49,17 @@ import Login from './components/Login';
 import BookSearch from './components/BookSearch';
 import Dashboard from './components/Dashboard';
 import Addbook from './components/Addbook';
+import UserProfile from './components/userprofile';
+import { AuthProvider } from './components/AuthContext';
 
 function App() {
   return (
-    //   <div className="App">
-    //      <header />
-    //      <div classname="main-container">
-    //        <sidebar />
-    //        <Router>
-    //      <Routes>
-    //        <Route path="/login" element={<Login />} />
-    //        <Route path="/booksearch" element={<BookSearch />} />
-
-    //     </Routes>
-    //   </Router>
-    //        <content />
-    //    </div>
-    //  </div>
-
-    <Router>
-      <div className="App">
-        <header className="bg-primary text-white text-center py-3"><h1>Book Search Application</h1>
-          {/* <nav>
+    
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <header className="bg-primary text-white text-center py-3"><h1>Book Exchange Library </h1>
+            {/* <nav>
              <ul className="nav justify-content-center">
               <li className="nav-item"><Link className="nav-link text-white" to="/">Login</Link></li>
               <li className="nav-item"><Link className="nav-link text-white" to="/search">Book Search</Link></li>
@@ -78,18 +67,20 @@ function App() {
               <li className="nav-item"><Link className="nav-link text-white" to="/addbook">Add New Book</Link></li>
             </ul>
           </nav> */}
-        </header>
-        <main className="container mt-5">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/search" element={<BookSearch />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/addbook" element={<Addbook />} />
-          </Routes>
-        </main>
-        <footer className="bg-primary text-white text-center py-3 mt-auto"><p>&copy; 2024 Raghu DON</p></footer>
-      </div>
-    </Router>
+          </header>
+          <main className="container mt-5">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/search" element={<BookSearch />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/addbook" element={<Addbook />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+            </Routes>
+          </main>
+          <footer className="bg-primary text-white text-center py-3 mt-auto"><p>&copy; 2024 Book Exchange All rights reserved.</p></footer>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

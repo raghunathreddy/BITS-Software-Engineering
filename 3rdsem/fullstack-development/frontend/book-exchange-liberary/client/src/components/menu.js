@@ -8,9 +8,9 @@ const Menu = () => {
   return (
     <div className="menu">
       <ul>
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/settings">Settings</Link></li>
+        <li><Link to="/dashboard">My Book store</Link></li>
+        <li><Link to="/search">Exchahge Book</Link></li>
+        <li><Link to="/userprofile">Profile</Link></li>
         <li><Link to="/logout">Logout</Link></li>
       </ul>
     </div>

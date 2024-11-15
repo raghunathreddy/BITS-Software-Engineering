@@ -1,0 +1,42 @@
+/* UserProfile.css */
+.profile-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .profile-title {
+    text-align: left;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .profile-details {
+    font-size: 1.2rem;
+    color: #444;
+  }
+  
+  .profile-details p {
+    margin: 10px 0;
+  }
+  
+  .profile-details strong {
+    color: #2d3a3a;
+  }
+  
+  .loading,
+  .error {
+    text-align: left;
+    font-size: 1.5rem;
+    color: #f39c12; /* Loading color */
+  }
+  
+  .error {
+    color: #e74c3c; /* Error color */
+  }
+  
