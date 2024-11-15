@@ -23,9 +23,9 @@ namespace UserService.Api.Controllers
             //return new string[] { "value1", "value2" };
         }
         [HttpGet("{id}")]
-        public List<DtoUserprofile> GetUser(int id)
+        public DtoUserprofile GetUser(int id)
         {
-            return _userService.GetAllUsers();
+            return _userService.GetUsers(id);
             //return new string[] { "value1", "value2" };
         }
 

@@ -55,5 +55,14 @@ namespace BookManagement.Api.Controllers
             return _bookExchangeService.GetAllExchangedBooksTrx();
             //return new string[] { "value1", "value2" };
         }
+
+        [HttpGet]
+        public List<DtoBookExchangeTX> GetBookfilterTitle(string? title)
+        {
+            
+              var resultbooks=  _bookExchangeService.GetAllExchangedBooksTrx();
+             return resultbooks.Where(x => x.title.Contains(title)).ToList();
+            //return new string[] { "value1", "value2" };
+        }
     }
 }
