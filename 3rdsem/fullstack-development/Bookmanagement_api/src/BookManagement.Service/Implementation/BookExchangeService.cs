@@ -41,6 +41,13 @@ namespace BookManagement.Service.Implementation
             return _mapper.Map<List<DtoBookExchange>>(result);
         }
 
+        public List<DtoBookExchangeTX> GetAllExchangedBooksTrx()
+        {
+            var result = _bookexchangeReposiroty.GetAllexchangedBookTrx().Result;
+            return _mapper.Map<List<DtoBookExchangeTX>>(result);
+        }
+
+
         public DtoBookExchange GetAllExchangedBooksUser(int? user_id)
         {
             var result = _bookexchangeReposiroty.GetAllExchangedBookUser(user_id);

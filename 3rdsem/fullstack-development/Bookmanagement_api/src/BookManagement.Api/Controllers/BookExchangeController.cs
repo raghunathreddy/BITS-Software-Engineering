@@ -18,7 +18,7 @@ namespace BookManagement.Api.Controllers
             _bookExchangeService = bookexchangeservice;
         }
         // GET: api/<BookExchangeController>
-        [HttpGet]
+        
         [HttpGet]
         public List<DtoBookExchange> Get()
         {
@@ -49,6 +49,11 @@ namespace BookManagement.Api.Controllers
             _bookExchangeService.AddExchangedBooks(addExchangebook);
         }
 
-        
+        [HttpGet]
+        public List<DtoBookExchangeTX> GetExchangeBookdetails()
+        {
+            return _bookExchangeService.GetAllExchangedBooksTrx();
+            //return new string[] { "value1", "value2" };
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace BookManagement.Service.Interface
 
         public List<DtoBookExchange> RequesterExchangedBooks(DtoBookExchange searchbook);
         public List<DtoBookExchange> GetAllExchangedBooks();
+        public List<DtoBookExchangeTX> GetAllExchangedBooksTrx();
 
         void AddExchangedBooks(DtoBookExchange booksdetails);
     }

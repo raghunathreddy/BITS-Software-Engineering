@@ -11,6 +11,7 @@ namespace BookManagement.Repository.Interface
     {
         List<BookExchange> GetAllExchangedBookUser(int? user_id);
         Task<List<BookExchange>> GetAllExchangedBook();
+        Task<List<BookExchangeTX>> GetAllexchangedBookTrx();
 
         void AddExchangedBook(BookExchange usersdetails);
 

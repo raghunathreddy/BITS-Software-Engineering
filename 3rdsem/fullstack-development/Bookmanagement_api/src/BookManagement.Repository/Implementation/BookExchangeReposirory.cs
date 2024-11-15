@@ -101,6 +101,27 @@ namespace BookManagement.Repository.Implementation
             }
         }
 
+        public async Task<List<BookExchangeTX>> GetAllexchangedBookTrx()
+        {
+            using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
+            {
+                _sqlConnectionFactory.OpenConnection(connection);
+                using (var transaction = _sqlConnectionFactory.BeginTransaction(connection))
+                {
+                    try
+                    {
+                        var results = await connection.QueryAsync<BookExchangeTX>(" Select bx.exchange_id,usr.username as book_Owner,usrbx.username as Book_exchanged_To, bs.book_id,bs.title,bx.status Requested_status,bx.request_message,bx.delivery_method,bx.exchange_date from\r\n    BookExchange bx LEFT Join Books bs ON bx.book_id = bs.book_id\r\n\tLEFT join Users usr on bx.owner_id = usr.user_id\r\n\tLeft Join Users usrbx on bx.exchanged_to = usrbx.user_id", transaction: transaction);
+                        return results?.AsList();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new InvalidOperationException(ex.Message);
+                    }
+                }
+            }
+        }
+
         public List<BookExchange> GetAllExchangedBookUser(int? owner_id)
         {
             using (IDbConnection connection = _sqlConnectionFactory.GetConnection)
