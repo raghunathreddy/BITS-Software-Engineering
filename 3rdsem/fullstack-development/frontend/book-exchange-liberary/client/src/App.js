@@ -1,41 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Login from './components/Login';
-// import BookSearch from './components/BookSearch';
-// function App() {
-// return (
-// <Router>
-// <Routes>
-// <Route path="/login" element={<Login />} />
-// <Route path="/booksearch" element={<BookSearch />} />
-// {/* Add other routes here */}
-// </Routes>
-// </Router>
-
-
-// // <div className="App">
-// //   <header className="App-header">
-// //     {/* <img src={logo} className="App-logo" alt="logo" /> */}
-// //     {/* <p>
-// //       Edit <code>src/App.js</code> and save to reload.
-// //     </p>
-// //     <a
-// //       className="App-link"
-// //       href="https://reactjs.org"
-// //       target="_blank"
-// //       rel="noopener noreferrer"
-// //     >
-// //       Learn React
-// //     </a> */}
-// //     {/* <Login></Login> */}
-
-// //   </header>
-// // </div>
-// );
-// }
-
-// export default App;
 
 
 import React from 'react';
@@ -50,7 +12,11 @@ import BookSearch from './components/BookSearch';
 import Dashboard from './components/Dashboard';
 import Addbook from './components/Addbook';
 import UserProfile from './components/userprofile';
+import ProfileReset  from './components/ProfileReset';
 import { AuthProvider } from './components/AuthContext';
+
+
+
 
 function App() {
   return (
@@ -75,6 +41,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/addbook" element={<Addbook />} />
               <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/passwordreset" element={<ProfileReset />} />
             </Routes>
           </main>
           <footer className="bg-primary text-white text-center py-3 mt-auto"><p>&copy; 2024 Book Exchange All rights reserved.</p></footer>
