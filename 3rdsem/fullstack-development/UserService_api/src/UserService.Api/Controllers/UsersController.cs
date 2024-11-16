@@ -44,9 +44,9 @@ namespace UserService.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public void ResetPassword(int id,[FromBody] DtoUserprofile userdetails)
+        public void ResetPassword(int id,string password)
         {
-            var userdto = new DtoUserprofile() {user_id=id, pwd= userdetails.pwd };
+            var userdto = new DtoUserprofile() {user_id=id, pwd= password };
             _userService.Updatepwd(userdto);
         }
 
